@@ -45,8 +45,10 @@ public class GrantedAuthorityFromMemberOfAssertionAttributeUserDetailsService ex
 
     private static final String NON_EXISTENT_PASSWORD_VALUE = "NO_PASSWORD";
     private static final String DEFAULT_ATTRIBUTE = "memberOf";
+    private static final String DEFAULT_ROLE_PREFIX = "ROLE_";
 
     private String attribute = DEFAULT_ATTRIBUTE;
+    private String rolePrefix = DEFAULT_ROLE_PREFIX;
     private boolean convertToUpperCase = true;
     private boolean convertSpacesToUnderscores = true;
 
@@ -84,7 +86,7 @@ public class GrantedAuthorityFromMemberOfAssertionAttributeUserDetailsService ex
                     if (this.convertSpacesToUnderscores) {
                         value = value.replace(' ', '_');
                     }
-                    grantedAuthorities.add(new SimpleGrantedAuthority(value));
+                    grantedAuthorities.add(new SimpleGrantedAuthority(rolePrefix + value));
                 }
             } catch (InvalidNameException e) {
                 logger.warn("Couldn't convert \"" + memberOfString + "\" to an LdapName", e);
@@ -99,6 +101,15 @@ public class GrantedAuthorityFromMemberOfAssertionAttributeUserDetailsService ex
      */
     public void setAttribute(final String attribute) {
         this.attribute = attribute;
+    }
+    
+    /**
+     * Sets the role prefix to be used in creating every {@link org.springframework.security.core.GrantedAuthority}.
+     *
+     * @param rolePrefix
+     */
+    public void setRolePrefix(final String rolePrefix) {
+        this.rolePrefix = rolePrefix;
     }
 
     /**

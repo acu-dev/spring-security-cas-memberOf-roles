@@ -43,6 +43,7 @@ public class GrantedAuthorityFromMemberOfAssertionAttributeUserDetailsServiceTes
         uds.setConvertToUpperCase(false);
         uds.setConvertSpacesToUnderscores(false);
         uds.setAttribute("a");
+        uds.setRolePrefix("");
         Assertion assertion = mock(Assertion.class);
         AttributePrincipal principal = mock(AttributePrincipal.class);
         Map<String, Object> attributes = new HashMap<>();
@@ -69,7 +70,7 @@ public class GrantedAuthorityFromMemberOfAssertionAttributeUserDetailsServiceTes
         Assertion assertion = mock(Assertion.class);
         AttributePrincipal principal = mock(AttributePrincipal.class);
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put("memberOf", Arrays.asList("CN=role a1,ou=other,OU=roles,DC=spring,DC=io", "CN=role_a2,OU=roles,dc=spring,DC=io", null));
+        attributes.put("memberOf", Arrays.asList("CN=a1,ou=other,OU=roles,DC=spring,DC=io", "CN=a2,OU=roles,dc=spring,DC=io", null));
         attributes.put("someother", "unused");
         when(assertion.getPrincipal()).thenReturn(principal);
         when(principal.getAttributes()).thenReturn(attributes);
