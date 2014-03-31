@@ -34,7 +34,6 @@
         <connection>scm:git:git@github.com:acu-dev/spring-security-cas-memberOf-roles.git</connection>
         <developerConnection>scm:git:git@github.com:acu-dev/spring-security-cas-memberOf-roles.git</developerConnection>
         <url>https://github.com/acu-dev/spring-security-cas-memberOf-roles</url>
-        <tag>HEAD</tag>
     </scm>
     
     <distributionManagement>
